@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>{{ $store.state.name }}</div>
 </template>
 
 <script lang="ts">
