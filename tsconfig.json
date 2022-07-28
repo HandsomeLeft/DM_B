@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
+    //生成目标代码
     "target": "esnext",
+    //使用的模块化方案
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",

@@ -51,10 +51,32 @@ class request_DMB {
       }
     )
   }
-  request(config: dm_request_config) {
-    this.instance.request(config).then((res) => {
-      console.log(res)
+  request<T>(config: dm_request_config): Promise<T> {
+    return new Promise((resolve, reject) => {
+      if (config.interceptors?.requestIntercepter) {
+        config = config.interceptors.requestIntercepter(config)
+      }
+      this.instance
+        .request<any, T>(config)
+        .then((res) => {
+          resolve(res)
+        })
+        .catch((err) => {
+          reject(err)
+        })
     })
+  }
+  get<T>(config: dm_request_config): Promise<T> {
+    return this.request<T>({ ...config, method: 'GET' })
+  }
+  post<T>(config: dm_request_config): Promise<T> {
+    return this.request<T>({ ...config, method: 'POST' })
+  }
+  delete<T>(config: dm_request_config): Promise<T> {
+    return this.request<T>({ ...config, method: 'DELETE' })
+  }
+  pacth<T>(config: dm_request_config): Promise<T> {
+    return this.request<T>({ ...config, method: 'PATCH' })
   }
 }
 
