@@ -5,7 +5,7 @@
         <el-input v-model="account.name"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="account.password"></el-input>
+        <el-input v-model="account.password" type="password"></el-input>
       </el-form-item>
     </el-form>
   </div>
@@ -14,12 +14,13 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import { ElForm } from 'element-plus/lib/components'
+import local_cache from '@/utils/cache'
 
 export default defineComponent({
   setup() {
     const account = reactive({
-      name: '',
-      password: ''
+      name: local_cache.get_cache('name') ?? '',
+      password: local_cache.get_cache('password') ?? ''
     })
     const rules = {
       name: [
@@ -31,12 +32,17 @@ export default defineComponent({
         { pattern: /^[a-z0-9]{3,}$/, message: '密码必须是3位以上字母或数字' }
       ]
     }
-    const login_action = () => {
-      console.log('action')
+    const login_action = (is_keep_password: boolean) => {
+      // console.log('action')
       form_ref.value?.validate((valid) => {
-        if (valid) {
-          console.log('zz')
-        }
+        if (valid)
+          if (is_keep_password) {
+            local_cache.set_cache('name', account.name)
+            local_cache.set_cache('password', account.password)
+          } else {
+            local_cache.delete_cache('name')
+            local_cache.delete_cache('password')
+          }
       })
     }
     const form_ref = ref<InstanceType<typeof ElForm>>()

@@ -47,8 +47,8 @@ export default defineComponent({
     const account_ref = ref()
     const is_keep_password = ref(true)
     const login_btn = () => {
-      console.log('denglu')
-      account_ref.value?.login_action()
+      // console.log('denglu')
+      account_ref.value?.login_action(is_keep_password)
     }
     return {
       is_keep_password,
