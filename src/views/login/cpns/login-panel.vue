@@ -21,11 +21,18 @@
         <login_phone></login_phone>
       </el-tab-pane>
     </el-tabs>
+    <div class="account-control">
+      <el-checkbox v-model="is_keep_password">记住密码</el-checkbox>
+      <el-link type="=primary">忘记密码</el-link>
+    </div>
+    <el-button type="primary" class="login-btn" @click="login_btn"
+      >立即登录</el-button
+    >
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import login_account from './login-account.vue'
 import login_phone from './login-phone.vue'
 export default defineComponent({
@@ -37,14 +44,30 @@ export default defineComponent({
     login_phone
   },
   setup() {
-    return {}
+    const is_keep_password = ref(true)
+    const login_btn = () => {
+      console.log('denglu')
+    }
+    return {
+      is_keep_password,
+      login_btn
+    }
   }
 })
 </script>
 
 <style scoped lang="less">
-.demo-tabs {
+.login-panel {
   margin-bottom: 120px;
   width: 340px;
+}
+.account-control {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.login-btn {
+  margin-top: 10px;
+  width: 100%;
 }
 </style>
