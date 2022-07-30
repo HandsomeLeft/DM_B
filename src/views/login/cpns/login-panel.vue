@@ -9,7 +9,7 @@
             <span>账号登录</span>
           </span>
         </template>
-        <login_account></login_account>
+        <login_account ref="account_ref"></login_account>
       </el-tab-pane>
       <el-tab-pane label="Config">
         <template #label>
@@ -44,13 +44,16 @@ export default defineComponent({
     login_phone
   },
   setup() {
+    const account_ref = ref()
     const is_keep_password = ref(true)
     const login_btn = () => {
       console.log('denglu')
+      account_ref.value?.login_action()
     }
     return {
       is_keep_password,
-      login_btn
+      login_btn,
+      account_ref
     }
   }
 })

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form label-width="50px" :rules="rules" :model="account">
+    <el-form label-width="50px" :rules="rules" :model="account" ref="form_ref">
       <el-form-item label="账号" prop="name">
         <el-input v-model="account.name"></el-input>
       </el-form-item>
@@ -12,7 +12,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
+import { ElForm } from 'element-plus/lib/components'
 
 export default defineComponent({
   setup() {
@@ -30,9 +31,20 @@ export default defineComponent({
         { pattern: /^[a-z0-9]{3,}$/, message: '密码必须是3位以上字母或数字' }
       ]
     }
+    const login_action = () => {
+      console.log('action')
+      form_ref.value?.validate((valid) => {
+        if (valid) {
+          console.log('zz')
+        }
+      })
+    }
+    const form_ref = ref<InstanceType<typeof ElForm>>()
     return {
       account,
-      rules
+      rules,
+      login_action,
+      form_ref
     }
   }
 })
