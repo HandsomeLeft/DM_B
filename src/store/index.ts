@@ -1,10 +1,20 @@
 import { createStore } from 'vuex'
+import login from './login/login'
 
-const store = createStore({
+interface I_roote_state {
+  name: string
+  age: number
+}
+
+const store = createStore<I_roote_state>({
   state: () => {
     return {
-      name: 'ceaser'
+      name: 'ceaser',
+      age: 21
     }
+  },
+  modules: {
+    login
   }
 })
 
