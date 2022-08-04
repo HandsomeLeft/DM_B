@@ -5,7 +5,11 @@
       <span class="title">Vue3+TS</span>
     </div>
 
-    <el-menu default-active="2" class="el-menu-vertical-demo">
+    <el-menu
+      default-active="2"
+      class="el-menu-vertical-demo"
+      :collapse="collapse"
+    >
       <template v-for="item in user_menus" :key="item.id">
         <template v-if="item.type === 1">
           <el-sub-menu :index="item.id + ''">
@@ -38,6 +42,12 @@ import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default defineComponent({
+  props: {
+    collapse: {
+      type: Boolean,
+      default: false
+    }
+  },
   setup() {
     const store = useStore()
     const user_menus = computed(() => store.state.login.user_menus)

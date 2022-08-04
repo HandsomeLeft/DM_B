@@ -1,12 +1,12 @@
 <template>
   <div class="main">
     <el-container class="main-content">
-      <el-aside width="220px">
-        <nav_menu></nav_menu>
+      <el-aside :width="is_collapse ? '58px' : '210px'">
+        <nav_menu :collapse="is_collapse"></nav_menu>
       </el-aside>
       <el-container class="page">
         <el-header class="page-header">
-          <nav_header></nav_header>
+          <nav_header @fold_change="fold_change"></nav_header>
         </el-header>
         <el-main class="page-content">Main</el-main>
       </el-container>
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import nav_menu from '@/components/nav_menu'
 import nav_header from '@/components/nav_header'
 
@@ -25,7 +25,14 @@ export default defineComponent({
     nav_header
   },
   setup() {
-    return {}
+    const is_collapse = ref(false)
+    const fold_change = (is_fold: boolean) => {
+      is_collapse.value = is_fold
+    }
+    return {
+      fold_change,
+      is_collapse
+    }
   }
 })
 </script>
