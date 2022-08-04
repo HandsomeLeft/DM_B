@@ -5,7 +5,9 @@
         <nav_menu></nav_menu>
       </el-aside>
       <el-container class="page">
-        <el-header class="page-header">Header</el-header>
+        <el-header class="page-header">
+          <nav_header></nav_header>
+        </el-header>
         <el-main class="page-content">Main</el-main>
       </el-container>
     </el-container>
@@ -15,10 +17,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import nav_menu from '@/components/nav_menu'
+import nav_header from '@/components/nav_header'
 
 export default defineComponent({
   components: {
-    nav_menu
+    nav_menu,
+    nav_header
   },
   setup() {
     return {}
