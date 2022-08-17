@@ -6,6 +6,7 @@ import {
   request_user_menus
 } from '@/network/login/login'
 import local_cache from '@/utils/cache'
+import { map_menus_to_rotes } from '@/utils/map_menus'
 import router from '@/router/index'
 interface I_login_state {
   token: string
@@ -31,6 +32,8 @@ const login_module: Module<I_login_state, I_root_state> = {
     },
     change_user_menus(state, user_menus) {
       state.user_menus = user_menus
+      //将user_menus的映射关系添加到router中（router.main.children）
+      map_menus_to_rotes(user_menus)
     }
   },
   actions: {
