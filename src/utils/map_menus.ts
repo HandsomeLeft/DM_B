@@ -1,4 +1,4 @@
-import menu from '@/router/main/system/menu/menu'
+// import menu from '@/router/main/system/menu/menu'
 import { RouteRecordRaw } from 'vue-router'
 
 export function map_menus_to_rotes(user_menus: any): RouteRecordRaw[] {
