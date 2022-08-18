@@ -33,7 +33,12 @@ const login_module: Module<I_login_state, I_root_state> = {
     change_user_menus(state, user_menus) {
       state.user_menus = user_menus
       //将user_menus的映射关系添加到router中（router.main.children）
-      map_menus_to_rotes(user_menus)
+      const routes = map_menus_to_rotes(user_menus)
+      console.log(routes)
+
+      routes.forEach((route) => {
+        router.addRoute('main', route)
+      })
     }
   },
   actions: {
